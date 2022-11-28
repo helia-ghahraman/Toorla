@@ -1,4 +1,4 @@
-package gen;// Generated from C:/Users/USER/Desktop/compiler/grammer\Toorla.g4 by ANTLR 4.10.1
+package gen;// Generated from java-escape by ANTLR 4.11.1
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -8,9 +8,9 @@ import java.util.List;
 import java.util.Iterator;
 import java.util.ArrayList;
 
-@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
+@SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast", "CheckReturnValue"})
 public class ToorlaParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.10.1", RuntimeMetaData.VERSION); }
+	static { RuntimeMetaData.checkVersion("4.11.1", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -112,7 +112,7 @@ public class ToorlaParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Toorla.g4"; }
+	public String getGrammarFileName() { return "java-escape"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -128,6 +128,7 @@ public class ToorlaParser extends Parser {
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ProgramContext extends ParserRuleContext {
 		public ClassDeclarationContext c1;
 		public EntryClassDeclarationContext mainclass;
@@ -213,6 +214,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ClassDeclarationContext extends ParserRuleContext {
 		public Token className;
 		public Token classParent;
@@ -279,7 +281,7 @@ public class ToorlaParser extends Parser {
 			setState(108);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__5) | (1L << T__8) | (1L << T__9) | (1L << T__10))) != 0)) {
+			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 3648L) != 0) {
 				{
 				setState(106);
 				_errHandler.sync(this);
@@ -317,6 +319,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class EntryClassDeclarationContext extends ParserRuleContext {
 		public ClassDeclarationContext classDeclaration() {
 			return getRuleContext(ClassDeclarationContext.class,0);
@@ -365,6 +368,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class FieldDeclarationContext extends ParserRuleContext {
 		public Token fieldName;
 		public Token ii;
@@ -452,6 +456,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class Access_modifierContext extends ParserRuleContext {
 		public Access_modifierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -502,6 +507,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class MethodDeclarationContext extends ParserRuleContext {
 		public Access_modifierContext methodAccessModifier;
 		public Token methodName;
@@ -617,7 +623,7 @@ public class ToorlaParser extends Parser {
 			setState(160);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << T__11) | (1L << T__14) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__34) | (1L << T__38) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << CONST_NUM) | (1L << CONST_STR) | (1L << ID))) != 0)) {
+			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 12517424552513792L) != 0) {
 				{
 				{
 				setState(157);
@@ -643,6 +649,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ClosedStatementContext extends ParserRuleContext {
 		public StatementBlockContext s1;
 		public ClosedConditionalContext conditionalStat;
@@ -811,6 +818,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ClosedConditionalContext extends ParserRuleContext {
 		public ExpressionContext ifExp;
 		public ClosedStatementContext ifStat;
@@ -904,6 +912,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class OpenConditionalContext extends ParserRuleContext {
 		public ExpressionContext ifExp;
 		public StatementContext ifStat;
@@ -1082,6 +1091,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class OpenStatementContext extends ParserRuleContext {
 		public StatementOpenLoopContext s1;
 		public OpenConditionalContext conditionalStat;
@@ -1146,6 +1156,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContext extends ParserRuleContext {
 		public ClosedStatementContext s1;
 		public OpenStatementContext s2;
@@ -1208,6 +1219,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementVarDefContext extends ParserRuleContext {
 		public Token i1;
 		public ExpressionContext e1;
@@ -1292,6 +1304,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementBlockContext extends ParserRuleContext {
 		public StatementContext s;
 		public List<StatementContext> statement() {
@@ -1331,7 +1344,7 @@ public class ToorlaParser extends Parser {
 			setState(274);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__7) | (1L << T__11) | (1L << T__14) | (1L << T__17) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__34) | (1L << T__38) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << CONST_NUM) | (1L << CONST_STR) | (1L << ID))) != 0)) {
+			while (((_la) & ~0x3f) == 0 && ((1L << _la) & 12517424552513792L) != 0) {
 				{
 				{
 				setState(271);
@@ -1357,6 +1370,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementContinueContext extends ParserRuleContext {
 		public Token myContinue;
 		public StatementContinueContext(ParserRuleContext parent, int invokingState) {
@@ -1401,6 +1415,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementBreakContext extends ParserRuleContext {
 		public Token myBreak;
 		public StatementBreakContext(ParserRuleContext parent, int invokingState) {
@@ -1445,6 +1460,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementReturnContext extends ParserRuleContext {
 		public Token myReturn;
 		public ExpressionContext e;
@@ -1495,6 +1511,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementClosedLoopContext extends ParserRuleContext {
 		public ExpressionContext e;
 		public ClosedStatementContext s;
@@ -1552,6 +1569,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementOpenLoopContext extends ParserRuleContext {
 		public ExpressionContext e;
 		public OpenStatementContext s;
@@ -1609,6 +1627,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementWriteContext extends ParserRuleContext {
 		public Token printLine;
 		public ExpressionContext e;
@@ -1663,6 +1682,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementAssignmentContext extends ParserRuleContext {
 		public ExpressionContext left;
 		public Token assignOp;
@@ -1719,6 +1739,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementIncContext extends ParserRuleContext {
 		public ExpressionContext lvalExpr;
 		public Token incOp;
@@ -1769,6 +1790,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class StatementDecContext extends ParserRuleContext {
 		public ExpressionContext lvalExpr;
 		public Token decOp;
@@ -1819,6 +1841,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionContext extends ParserRuleContext {
 		public ExpressionOrContext e;
 		public ExpressionOrContext expressionOr() {
@@ -1864,6 +1887,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionOrContext extends ParserRuleContext {
 		public ExpressionAndContext a;
 		public ExpressionOrTempContext ot;
@@ -1915,6 +1939,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionOrTempContext extends ParserRuleContext {
 		public Token orOp;
 		public ExpressionAndContext a;
@@ -1988,6 +2013,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionAndContext extends ParserRuleContext {
 		public ExpressionEqContext e;
 		public ExpressionAndTempContext at;
@@ -2039,6 +2065,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionAndTempContext extends ParserRuleContext {
 		public Token andOp;
 		public ExpressionEqContext e;
@@ -2113,6 +2140,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionEqContext extends ParserRuleContext {
 		public ExpressionCmpContext c;
 		public ExpressionEqTempContext et;
@@ -2164,6 +2192,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionEqTempContext extends ParserRuleContext {
 		public Token eqOp;
 		public Token neqOp;
@@ -2257,6 +2286,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionCmpContext extends ParserRuleContext {
 		public ExpressionAddContext a;
 		public ExpressionCmpTempContext ct;
@@ -2308,6 +2338,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionCmpTempContext extends ParserRuleContext {
 		public Token ltOp;
 		public Token gtOp;
@@ -2403,6 +2434,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionAddContext extends ParserRuleContext {
 		public ExpressionMultModContext m;
 		public ExpressionAddTempContext at;
@@ -2454,6 +2486,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionAddTempContext extends ParserRuleContext {
 		public Token addOp;
 		public Token subOp;
@@ -2551,6 +2584,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionMultModContext extends ParserRuleContext {
 		public ExpressionUnaryContext u;
 		public ExpressionMultModTempContext mt;
@@ -2602,6 +2636,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionMultModTempContext extends ParserRuleContext {
 		public Token mulOp;
 		public Token divOp;
@@ -2709,6 +2744,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionUnaryContext extends ParserRuleContext {
 		public Token notOp;
 		public Token negOp;
@@ -2801,6 +2837,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionMethodsContext extends ParserRuleContext {
 		public ExpressionOtherContext o;
 		public ExpressionMethodsTempContext mt;
@@ -2852,6 +2889,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionMethodsTempContext extends ParserRuleContext {
 		public Token dotOp;
 		public Token i;
@@ -2916,7 +2954,7 @@ public class ToorlaParser extends Parser {
 					setState(417);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-					if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__34) | (1L << T__38) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << CONST_NUM) | (1L << CONST_STR) | (1L << ID))) != 0)) {
+					if (((_la) & ~0x3f) == 0 && ((1L << _la) & 12517424486158336L) != 0) {
 						{
 						setState(409);
 						((ExpressionMethodsTempContext)_localctx).e1 = expression();
@@ -3003,6 +3041,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ExpressionOtherContext extends ParserRuleContext {
 		public Token n;
 		public Token s;
@@ -3165,7 +3204,7 @@ public class ToorlaParser extends Parser {
 				setState(467);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__11) | (1L << T__34) | (1L << T__38) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << CONST_NUM) | (1L << CONST_STR) | (1L << ID))) != 0)) {
+				if (((_la) & ~0x3f) == 0 && ((1L << _la) & 12517424486158336L) != 0) {
 					{
 					setState(459);
 					((ExpressionOtherContext)_localctx).e3 = expression();
@@ -3205,6 +3244,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class ToorlaTypeContext extends ParserRuleContext {
 		public SingleTypeContext st;
 		public SingleTypeContext singleType() {
@@ -3263,6 +3303,7 @@ public class ToorlaParser extends Parser {
 		return _localctx;
 	}
 
+	@SuppressWarnings("CheckReturnValue")
 	public static class SingleTypeContext extends ParserRuleContext {
 		public Token i;
 		public TerminalNode ID() { return getToken(ToorlaParser.ID, 0); }

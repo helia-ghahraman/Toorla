@@ -21,13 +21,6 @@ public class compiler {
         ParseTree tree=parser.program();
         ParseTreeWalker walker=new ParseTreeWalker();
         ToorlaListener listener=new ProgramPrinter();
-//        walker.walk(listener,tree);
-
-
-
-
-
-
-
+        walker.walk(listener,tree);
     }
 }

@@ -7,34 +7,67 @@ import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class ProgramPrinter implements ToorlaListener {
+    int indent=0;
+    boolean entry=false;
+    String currentClassName=null;
     @Override
     public void enterProgram(ToorlaParser.ProgramContext ctx) {
-        System.out.println(ctx.getText());
+
+        System.out.println("program start {");
+        indent+=4;
     }
 
     @Override
     public void exitProgram(ToorlaParser.ProgramContext ctx) {
-
+        System.out.println("}");
     }
 
     @Override
     public void enterClassDeclaration(ToorlaParser.ClassDeclarationContext ctx) {
+        currentClassName=ctx.className.getText();
+        for(int i=0;i<indent;i++){
+            System.out.print(" ");
+        }
+        System.out.print("class: "+ctx.className.getText()+"/ "+"class parent: ");
+        if(ctx.classParent==null){
+            System.out.print("none"+"/ "+"isEntry: ");
+        }
+        else{
+            System.out.print(ctx.classParent.getText()+"/ "+"isEntry: ");
+        }
+
+        if(entry){
+            System.out.print("true");
+        }
+        else{
+            System.out.print("false");
+        }
+        System.out.println("{");
+        indent+=4;
+
 
     }
 
     @Override
     public void exitClassDeclaration(ToorlaParser.ClassDeclarationContext ctx) {
+        currentClassName=null;
+        entry=false;
+        indent-=4;
+        for(int i=0;i<indent;i++){
+            System.out.print(" ");
+        }
+        System.out.println("}");
 
     }
 
     @Override
     public void enterEntryClassDeclaration(ToorlaParser.EntryClassDeclarationContext ctx) {
-
+        entry=true;
     }
 
     @Override
     public void exitEntryClassDeclaration(ToorlaParser.EntryClassDeclarationContext ctx) {
-
+        entry=false;
     }
 
     @Override
@@ -59,12 +92,42 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterMethodDeclaration(ToorlaParser.MethodDeclarationContext ctx) {
+        if(ctx.methodName.getText().equals(currentClassName)){
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+
+            }
+            System.out.println("class constructor: "+ctx.methodName.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
+            indent+=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.print("parameters list: ");
+            if(ctx.param1==null){
+                System.out.println("[]");
+            }
+            else{
+                System.out.print("parameters list: [type: "+ctx.typeP1.getText()+"/ name: "+ctx.param1.getText());
+
+            }
+
+
+
+
+        }
+
+
+
+
+
+
+
 
     }
 
     @Override
     public void exitMethodDeclaration(ToorlaParser.MethodDeclarationContext ctx) {
-
+//        indent-=4;
     }
 
     @Override
