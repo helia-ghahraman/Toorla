@@ -1,5 +1,5 @@
 class Operator inherits Test:
-    private field result int;
+    private field result, result2 int;
     public function Operator(a:int , b: int, c:int) returns int:
         return 1;
     end

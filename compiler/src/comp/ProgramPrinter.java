@@ -4,7 +4,12 @@ import gen.ToorlaListener;
 import gen.ToorlaParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramPrinter implements ToorlaListener {
     int indent=0;
@@ -73,6 +78,23 @@ public class ProgramPrinter implements ToorlaListener {
     @Override
     public void enterFieldDeclaration(ToorlaParser.FieldDeclarationContext ctx) {
 
+
+        List<ParseTree> list=ctx.children;
+        ArrayList<String> newList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i).getText());
+        }
+        int index=newList.indexOf("field");
+        for (int i=index+1;i<newList.size()-1;i+=2){
+            for(int j=0;j<indent;j++){
+                System.out.print(" ");
+            }
+            System.out.println("field: "+newList.get(i)+ "/ type: "+newList.get(newList.size()-2));
+        }
+
+
+
+
     }
 
     @Override
@@ -107,9 +129,26 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.println("[]");
             }
             else{
-                System.out.print("parameters list: [type: "+ctx.typeP1.getText()+"/ name: "+ctx.param1.getText());
+                System.out.print("[");
+                List<ParseTree> list=ctx.children;
+                ArrayList<String> newList=new ArrayList<>();
+                for(int i=0;i<list.size();i++){
+                    newList.add(list.get(i).getText());
+                }
+                int first=newList.indexOf("(");
+                int last=newList.indexOf(")");
+                for(int j=first+1;j<last;j+=4){
+                    if(j!=first+1){
+                        System.out.print(",");
+
+                    }
+                    System.out.print("type: "+newList.get(j+2)+"/ name: "+newList.get(j));
+                }
+                System.out.println("]");
 
             }
+
+
 
 
 
@@ -127,7 +166,7 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void exitMethodDeclaration(ToorlaParser.MethodDeclarationContext ctx) {
-//        indent-=4;
+
     }
 
     @Override
