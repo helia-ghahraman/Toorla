@@ -16,9 +16,10 @@ class Operator inherits Test:
     public function comparator(a:int , b: int) returns string:
         if(a<b)
         begin
-            var alaki = 3;
+
             if(a<0)
             begin
+                var alaki = 3;
                 if(a<0)
                 begin
                     print("a is negative");

@@ -114,10 +114,10 @@ public class ProgramPrinter implements ToorlaListener {
         }
         if(ctx.methodName.getText().equals(currentClassName)){
             if (ctx.methodAccessModifier.getText()==null){
-                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+"public{");
+                System.out.println("class constructor: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+"public{");
             }
             else {
-                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
+                System.out.println("class constructor: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
             }
             indent+=4;
             for(int i=0;i<indent;i++){
@@ -240,11 +240,11 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.print(" ");
             }
             if(!printScope){
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
                 printScope = true;
             }
             else {
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
             }
             indent+=4;
         }
@@ -275,11 +275,11 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.print(" ");
             }
             if(!printScope){
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
                 printScope = true;
             }
             else {
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
             }
             indent+=4;
         }
@@ -393,11 +393,11 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.print(" ");
             }
             if(!printScope){
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
                 printScope = true;
             }
             else {
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
             }
             indent+=4;
         }
@@ -428,11 +428,11 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.print(" ");
             }
             if(!printScope){
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
                 printScope = true;
             }
             else {
-                System.out.println( "nested {\n");
+                System.out.println( "nested {");
             }
             indent+=4;
         }
