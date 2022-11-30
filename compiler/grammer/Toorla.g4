@@ -99,8 +99,7 @@ statementClosedLoop:
 	'while' '(' e = expression ')' s = closedStatement;
 
 statementOpenLoop:
-    'while' '(' e = expression ')' s = openStatement
-;
+    'while' '(' e = expression ')' s = openStatement;
 
 statementWrite:
 	printLine='print' '(' e = expression ')' ';'

@@ -1,5 +1,5 @@
 class Operator inherits Test:
-    private field result int;
+    private field result, result2 int;
     public function Operator(a:int , b: int, c:int) returns int:
         return 1;
     end
@@ -18,14 +18,26 @@ class Operator inherits Test:
         begin
             var alaki = 3;
             if(a<0)
+            begin
+                if(a<0)
+                begin
+                    print("a is negative");
+                    if(a<0)
+                    begin
+                        print("a is negative");
+                    end
+                end
                 print("a is negative");
-            return "b is bigger than a";
+                return "b is bigger than a";
+            end
         end
         elif(a>b)
         begin
-            if(b<0)
+           while(b<0)
+            begin
                 print("b is negative");
-            return "a is bigger than b";
+                return "a is bigger than b";
+            end
         end
         else
             return "a and b are equal";

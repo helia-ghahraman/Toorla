@@ -4,12 +4,18 @@ import gen.ToorlaListener;
 import gen.ToorlaParser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProgramPrinter implements ToorlaListener {
     int indent=0;
     boolean entry=false;
     String currentClassName=null;
+    int scopeCount = 0;
+    boolean printScope = false;
     @Override
     public void enterProgram(ToorlaParser.ProgramContext ctx) {
 
@@ -72,7 +78,18 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterFieldDeclaration(ToorlaParser.FieldDeclarationContext ctx) {
-
+        List<ParseTree> list=ctx.children;
+        ArrayList<String> newList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i).getText());
+        }
+        int index=newList.indexOf("field");
+        for (int i=index+1;i<newList.size()-1;i+=2){
+            for(int j=0;j<indent;j++){
+                System.out.print(" ");
+            }
+            System.out.println("field: "+newList.get(i)+ "/ type: "+newList.get(newList.size()-2));
+        }
     }
 
     @Override
@@ -92,12 +109,16 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterMethodDeclaration(ToorlaParser.MethodDeclarationContext ctx) {
+        for(int i=0;i<indent;i++){
+            System.out.print(" ");
+        }
         if(ctx.methodName.getText().equals(currentClassName)){
-            for(int i=0;i<indent;i++){
-                System.out.print(" ");
-
+            if (ctx.methodAccessModifier.getText()==null){
+                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+"public{");
             }
-            System.out.println("class constructor: "+ctx.methodName.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
+            else {
+                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
+            }
             indent+=4;
             for(int i=0;i<indent;i++){
                 System.out.print(" ");
@@ -107,27 +128,97 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.println("[]");
             }
             else{
-                System.out.print("parameters list: [type: "+ctx.typeP1.getText()+"/ name: "+ctx.param1.getText());
-
+                System.out.print("[");
+                List<ParseTree> list=ctx.children;
+                ArrayList<String> newList=new ArrayList<>();
+                for(int i=0;i<list.size();i++){
+                    newList.add(list.get(i).getText());
+                }
+                int first=newList.indexOf("(");
+                int last=newList.indexOf(")");
+                for(int j=first+1;j<last;j+=4){
+                    if(j!=first+1){
+                        System.out.print(",");
+                    }
+                    System.out.print("type: "+newList.get(j+2)+"/ name: "+newList.get(j));
+                }
+                System.out.println("]");
             }
 
+        }
+        else if(ctx.methodName.getText().equals("main")) {
+            System.out.println("main method / "+"return type: "+ctx.t.getText()+" {");
+            indent+=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.print("parameters list: ");
+            if(ctx.param1==null){
+                System.out.println("[]");
+            }
+            else{
+                System.out.print("[");
+                List<ParseTree> list=ctx.children;
+                ArrayList<String> newList=new ArrayList<>();
+                for(int i=0;i<list.size();i++){
+                    newList.add(list.get(i).getText());
+                }
+                int first=newList.indexOf("(");
+                int last=newList.indexOf(")");
+                for(int j=first+1;j<last;j+=4){
+                    if(j!=first+1){
+                        System.out.print(",");
+                    }
+                    System.out.print("type: "+newList.get(j+2)+"/ name: "+newList.get(j));
+                }
+                System.out.println("]");
+            }
 
-
-
+        }
+        else {
+            if (ctx.methodAccessModifier.getText()==null){
+                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+"public{");
+            }
+            else {
+                System.out.println("class method: "+ctx.methodName.getText()+" / "+"return type: "+ctx.t.getText()+" / "+"type: "+ctx.methodAccessModifier.getText()+"{");
+            }
+            indent+=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.print("parameters list: ");
+            if(ctx.param1==null){
+                System.out.println("[]");
+            }
+            else{
+                System.out.print("[");
+                List<ParseTree> list=ctx.children;
+                ArrayList<String> newList=new ArrayList<>();
+                for(int i=0;i<list.size();i++){
+                    newList.add(list.get(i).getText());
+                }
+                int first=newList.indexOf("(");
+                int last=newList.indexOf(")");
+                for(int j=first+1;j<last;j+=4){
+                    if(j!=first+1){
+                        System.out.print(",");
+                    }
+                    System.out.print("type: "+newList.get(j+2)+"/ name: "+newList.get(j));
+                }
+                System.out.println("]");
+            }
+        }
         }
 
 
 
-
-
-
-
-
-    }
-
     @Override
     public void exitMethodDeclaration(ToorlaParser.MethodDeclarationContext ctx) {
-//        indent-=4;
+        indent-=4;
+        for(int i=0;i<indent;i++){
+            System.out.print(" ");
+        }
+        System.out.println("}");
     }
 
     @Override
@@ -142,21 +233,73 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterClosedConditional(ToorlaParser.ClosedConditionalContext ctx) {
+        scopeCount ++;
+        if(scopeCount >= 2) {
 
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            if(!printScope){
+                System.out.println( "nested {\n");
+                printScope = true;
+            }
+            else {
+                System.out.println( "nested {\n");
+            }
+            indent+=4;
+        }
     }
 
     @Override
     public void exitClosedConditional(ToorlaParser.ClosedConditionalContext ctx) {
+        scopeCount --;
+        if( scopeCount!=0 &&printScope){
+            indent-=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.println( "}");
 
+        }
+        if(scopeCount == 0){
+            printScope = false;
+        }
     }
 
     @Override
     public void enterOpenConditional(ToorlaParser.OpenConditionalContext ctx) {
+        scopeCount ++;
+        if(scopeCount >= 2) {
+
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            if(!printScope){
+                System.out.println( "nested {\n");
+                printScope = true;
+            }
+            else {
+                System.out.println( "nested {\n");
+            }
+            indent+=4;
+        }
 
     }
 
     @Override
     public void exitOpenConditional(ToorlaParser.OpenConditionalContext ctx) {
+        scopeCount --;
+        if( scopeCount!=0 &&printScope){
+            indent-=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.println( "}");
+
+        }
+        if(scopeCount == 0){
+            printScope = false;
+        }
 
     }
 
@@ -182,7 +325,18 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterStatementVarDef(ToorlaParser.StatementVarDefContext ctx) {
-
+        List<ParseTree> list=ctx.children;
+        ArrayList<String> newList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i).getText());
+        }
+        int index=newList.indexOf("var");
+        for (int i=index+1;i<newList.size()-1;i+=4){
+            for(int j=0;j<indent;j++){
+                System.out.print(" ");
+            }
+            System.out.println("field: "+newList.get(i)+ "/ type: local var");
+        }
     }
 
     @Override
@@ -232,22 +386,72 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterStatementClosedLoop(ToorlaParser.StatementClosedLoopContext ctx) {
+        scopeCount ++;
+        if(scopeCount >= 2) {
 
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            if(!printScope){
+                System.out.println( "nested {\n");
+                printScope = true;
+            }
+            else {
+                System.out.println( "nested {\n");
+            }
+            indent+=4;
+        }
     }
 
     @Override
     public void exitStatementClosedLoop(ToorlaParser.StatementClosedLoopContext ctx) {
+        scopeCount --;
+        if( scopeCount!=0 &&printScope){
+            indent-=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.println( "}");
 
+        }
+        if(scopeCount == 0){
+            printScope = false;
+        }
     }
 
     @Override
     public void enterStatementOpenLoop(ToorlaParser.StatementOpenLoopContext ctx) {
+        scopeCount ++;
+        if(scopeCount >= 2) {
 
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            if(!printScope){
+                System.out.println( "nested {\n");
+                printScope = true;
+            }
+            else {
+                System.out.println( "nested {\n");
+            }
+            indent+=4;
+        }
     }
 
     @Override
     public void exitStatementOpenLoop(ToorlaParser.StatementOpenLoopContext ctx) {
+        scopeCount --;
+        if( scopeCount!=0 &&printScope){
+            indent-=4;
+            for(int i=0;i<indent;i++){
+                System.out.print(" ");
+            }
+            System.out.println( "}");
 
+        }
+        if(scopeCount == 0){
+            printScope = false;
+        }
     }
 
     @Override
@@ -452,7 +656,20 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterExpressionOther(ToorlaParser.ExpressionOtherContext ctx) {
-
+        List<ParseTree> list=ctx.children;
+        ArrayList<String> newList=new ArrayList<>();
+        for(int i=0;i<list.size();i++){
+            newList.add(list.get(i).getText());
+        }
+        int index=newList.indexOf("new");
+        if(index>=0&&newList.get(index).equals("new")) {
+            for (int i = index + 1; i < newList.size() - 1; i += 4) {
+                for (int j = 0; j < indent; j++) {
+                    System.out.print(" ");
+                }
+                System.out.println("field: " + newList.get(i) + "/ type: local var");
+            }
+        }
     }
 
     @Override
