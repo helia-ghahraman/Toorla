@@ -13,7 +13,7 @@ import java.io.IOException;
 public class compiler {
     public static void main(String[]args) throws IOException {
 
-        CharStream stream= CharStreams.fromFileName("code.trl");
+        CharStream stream= CharStreams.fromFileName("test2.trl");
         ToorlaLexer lexer=new ToorlaLexer(stream);
         TokenStream tokens=new CommonTokenStream(lexer);
         ToorlaParser parser=new ToorlaParser(tokens);

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ProgramPrinter implements ToorlaListener {
     int indent=0;
+    int isNew=0;
     boolean entry=false;
     String currentClassName=null;
     int scopeCount = 0;
@@ -336,6 +337,7 @@ public class ProgramPrinter implements ToorlaListener {
                 System.out.print(" ");
             }
             System.out.println("field: "+newList.get(i)+ "/ type: local var");
+
         }
     }
 
@@ -466,6 +468,58 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterStatementAssignment(ToorlaParser.StatementAssignmentContext ctx) {
+        List<ParseTree> list=ctx.children;
+        if(ctx.right!=null){
+
+            if(ctx.right.e!=null){
+
+                if(ctx.right.e.a!=null){
+
+                    if(ctx.right.e.a.e!=null){
+
+                        if(ctx.right.e.a.e.c!=null){
+
+                            if(ctx.right.e.a.e.c.a!=null){
+
+                                if(ctx.right.e.a.e.c.a.m!=null){
+
+                                    if(ctx.right.e.a.e.c.a.m.u!=null){
+
+                                        if(ctx.right.e.a.e.c.a.m.u.m!=null){
+
+                                            if(ctx.right.e.a.e.c.a.m.u.m.o!=null) {
+
+                                                if(ctx.right.e.a.e.c.a.m.u.m.o.newModifier!=null){
+                                                    for (int j = 0; j < indent; j++) {
+                                                        System.out.print(" ");
+                                                    }
+                                                    System.out.println("field: "+ ctx.left.getText() + "/ type: local var");
+
+
+                                                }
+
+
+                                            }
+
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
 
     }
 
@@ -641,7 +695,17 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void exitExpressionMethods(ToorlaParser.ExpressionMethodsContext ctx) {
-
+//        if(ctx.o.newModifier!=null){
+//            if(ctx.mt!=null) {
+//                List<ParseTree> list = ctx.children;
+//                ArrayList<String> newList = new ArrayList<>();
+//                for (int i = 0; i < list.size(); i++) {
+//                    newList.add(list.get(i).getText());
+//                    System.out.println(list.get(i).getText());
+//                }
+//            }
+//
+//        }
     }
 
     @Override
@@ -656,20 +720,6 @@ public class ProgramPrinter implements ToorlaListener {
 
     @Override
     public void enterExpressionOther(ToorlaParser.ExpressionOtherContext ctx) {
-        List<ParseTree> list=ctx.children;
-        ArrayList<String> newList=new ArrayList<>();
-        for(int i=0;i<list.size();i++){
-            newList.add(list.get(i).getText());
-        }
-        int index=newList.indexOf("new");
-        if(index>=0&&newList.get(index).equals("new")) {
-            for (int i = index + 1; i < newList.size() - 1; i += 4) {
-                for (int j = 0; j < indent; j++) {
-                    System.out.print(" ");
-                }
-                System.out.println("field: " + newList.get(i) + "/ type: local var");
-            }
-        }
     }
 
     @Override
