@@ -1,25 +1,25 @@
-class thisClass inherits thatClass:
+class thisClass inherits mainClass:
     private field myfield1 int;
     field field1,field2,field3 string;
 
     public function Jaleb(a:int , b:int) returns int:
-            self.result = a - b;
+            var result = a - b;
             if(field1<field2)
             begin
+                 var jadid = 3;
                  print("field1 is larger");
                  if(field1<0)
                  begin
-                      var jadid = 3;
                       print("field1 is negative");
                  end
                  else
                       print("field1 is posetive");
             end
 
-            return self.result;
+            return myfield1;
     end
 
-     public function loopTest(arr:int[]) returns int:
+     public function loopTest(arr:int[]) returns string:
              var counter = 0;
              while(field2==0)
              begin
@@ -38,9 +38,9 @@ class thisClass inherits thatClass:
 
 
 end
-entry class mainClass:
+entry class mainClass inherits thisClass:
 
-     private function main(a:string , b: string, c:int, d:bool) returns string:
+     private function main(a:string , b: string, c:int, d:bool) returns int:
         var thisvar=true;
          var mainvar="a";
          mainField=new int[10];

@@ -1,9 +1,10 @@
-class Operator inherits Test:
-    private field result, result2 int;
-    public function Operator(a:int , b: int, c:int) returns int:
+class Operator inherits MainClass:
+    private field result int;
+    private field result int;
+    public function Operator(a: int) returns int:
         return 1;
     end
-    public function subtractor(a:int , b:int) returns int:
+    private function subtractor(a:int , b:int) returns int:
         self.result = a - b;
         return self.result;
     end
@@ -16,26 +17,15 @@ class Operator inherits Test:
     public function comparator(a:int , b: int) returns string:
         if(a<b)
         begin
-
-            if(a<0)
-            begin
-                var alaki = 3;
-                if(a<0)
-                begin
-                    print("a is negative");
-                    if(a<0)
-                    begin
-                        print("a is negative");
-                    end
-                end
+            var alaki = 3;
+            if(a<0) begin
                 print("a is negative");
                 return "b is bigger than a";
             end
         end
-        elif(a>b)
+        if(a>b)
         begin
-           while(b<0)
-            begin
+            if(b<0) begin
                 print("b is negative");
                 return "a is bigger than b";
             end
@@ -44,12 +34,51 @@ class Operator inherits Test:
             return "a and b are equal";
     end
 end
-entry class MainClass:
+class Operator inherits MainClass:
+    private field result int;
+    private field result int;
+    public function Operator(a: int) returns int:
+        return 1;
+    end
+    private function subtractor(a:int , b:int) returns int:
+        self.result = a - b;
+        return self.result;
+    end
+    public function arrCollector(arr:int[]) returns int:
+        var counter = 0;
+        while(counter < arr.length)
+            self.result = self.result + arr[counter];
+        return self.result;
+    end
+    public function comparator(a:int , b: int) returns string:
+        if(a<b)
+        begin
+            var alaki = 3;
+            if(a<0) begin
+                print("a is negative");
+                return "b is bigger than a";
+            end
+        end
+        if(a>b)
+        begin
+            if(b<0) begin
+                print("b is negative");
+                return "a is bigger than b";
+            end
+        end
+        else
+            return "a and b are equal";
+    end
+end
+entry class MainClass inherits Test:
+    private field result int;
+    private field result int;
     function main() returns int:
         var a = 5;
         var b = 6;
         arr = new int[4];
-        var sum=0, min=1;
+        var sum=0;
+        var sub=0;
         var sub=0;
         var bigger="";
         operator = new Operator();
@@ -58,4 +87,32 @@ entry class MainClass:
         bigger = operator.comparator(a,b);
         return 1;
     end
+        function main() returns String:
+            var a = 5;
+            var b = 6;
+            arr = new int[4];
+            var sum=0;
+            var sub=0;
+            var bigger="";
+            operator = new Operator();
+            sub = operator.subtractor();
+            sum = operator.arrCollector(arr);
+            bigger = operator.comparator(a,b);
+            return 1;
+        end
+end
+    class Test inherits Operator:
+        function main() returns int:
+            var a = 5;
+            var b = 6;
+            arr = new int[4];
+            var sum=0;
+            var sub=0;
+            var bigger="";
+            operator = new Operator();
+            sub = operator.subtractor();
+            sum = operator.arrCollector(arr);
+            bigger = operator.comparator(a,b);
+            return 1;
+        end
 end
